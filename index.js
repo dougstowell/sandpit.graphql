@@ -1,3 +1,3 @@
-const Db = require('./data-access/db');
+import Db from './data-access/db';
 
 console.log('sandpit.graphql ready');

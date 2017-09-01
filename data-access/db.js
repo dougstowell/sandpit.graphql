@@ -1,6 +1,6 @@
-const Sequelize = require('sequelize');
-const Faker = require('faker');
-const _ = require('lodash');
+import Sequelize from 'sequelize';
+import Faker from 'faker';
+import _ from 'lodash';
 
 const Conn = new Sequelize(
   'blueprint-dev-graphql',
@@ -83,7 +83,17 @@ function getBookings(filter) {
   });
 }
 
-module.exports = {
-  getUsers: getUsers,
-  getBookings: getBookings
-}
+const funcs = {
+  getUsers (filter) {
+    return Conn.models.user.findAll({
+      where: filter
+    });
+  },
+  getBookings (filter) {
+    return Conn.models.booker.findAll({
+      where: filter
+    });
+  }
+};
+
+export default funcs;
