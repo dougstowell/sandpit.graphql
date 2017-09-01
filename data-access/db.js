@@ -11,6 +11,13 @@ const Conn = new Sequelize(
   }
 );
 
+const Room = Conn.define('room', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+});
+
 const User = Conn.define('user', {
   userName: {
     type: Sequelize.STRING,
@@ -44,7 +51,7 @@ const Booking = Conn.define('booking', {
   },
   description: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   }
 });
 
@@ -55,35 +62,40 @@ Booking.belongsTo(User);
 Conn.sync({
   force: true
 }).then(() => {
-  _.times(10, () => {
-    return User.create({
-      userName: Faker.internet.userName(),
-      firstName: Faker.name.firstName(),
-      lastName: Faker.name.lastName(),
-      email: Faker.internet.email(),
-      isAdmin: false
-    }).then(user => {
-      return user.createBooking({
-        reason: `Room booking needed by ${user.firstName}`,
-        description: 'For project stand ups'
+  // Spin up some sample data for illustrative purposes only.
+  Room.bulkCreate([
+    { name: 'Brownlee' },
+    { name: 'Ennis' },
+    { name: 'Training Room' }
+  ]).then(() => {
+    return Room.findAll();
+  }).then(rooms => {
+    _.times(10, () => {
+      return User.create({
+        userName: Faker.internet.userName(),
+        firstName: Faker.name.firstName(),
+        lastName: Faker.name.lastName(),
+        email: Faker.internet.email(),
+        isAdmin: false
+      }).then(user => {
+        return user.createBooking({
+          reason: `Room booking needed by ${user.firstName}`,
+          description: 'For project stand ups'
+        });
       });
     });
   });
 });
 
-function getUsers(filter) {
-  return Conn.models.user.findAll({
-    where: filter
-  });
-}
-
-function getBookings(filter) {
-  return Conn.models.booker.findAll({
-    where: filter
-  });
-}
-
 const funcs = {
+  getRooms (filter) {
+    return Conn.models.room.findAll({
+      where: filter
+    });
+  },
+  getRoom (id) {
+    return Conn.models.room.findById(id);
+  },
   getUsers (filter) {
     return Conn.models.user.findAll({
       where: filter
