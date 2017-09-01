@@ -1,3 +1,10 @@
+import Express from 'express';
 import Db from './data-access/db';
 
-console.log('sandpit.graphql ready');
+const APP_PORT = 3001;
+
+const app = Express();
+
+app.listen(APP_PORT, () => {
+  console.log(`App listening on port ${APP_PORT}`);
+});
