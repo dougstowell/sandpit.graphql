@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/dougstowell/sandpit.graphql/issues"
   },
-  "homepage": "https://github.com/dougstowell/sandpit.graphql#readme"
+  "homepage": "https://github.com/dougstowell/sandpit.graphql#readme",
+  "dependencies": {
+    "faker": "^4.1.0",
+    "lodash": "^4.17.4",
+    "sequelize": "^4.8.0"
+  }
 }
