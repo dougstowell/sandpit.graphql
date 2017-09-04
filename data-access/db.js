@@ -3,7 +3,7 @@ import Faker from 'faker';
 import _ from 'lodash';
 
 const Conn = new Sequelize(
-  'blueprint-dev-graphql',
+  'dev-graphql',
   'postgres',
   '', {
     dialect: 'postgres',
