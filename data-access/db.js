@@ -89,6 +89,11 @@ Conn.sync({
 });
 
 const funcs = {
+  createRoom (name) {
+    return Conn.models.room.create({
+      name
+    });
+  },
   getRooms (filter) {
     return Conn.models.room.findAll({
       where: filter
@@ -97,6 +102,19 @@ const funcs = {
   getRoom (id) {
     return Conn.models.room.findById(id);
   },
+  updateRoom (id, name) {
+    return Conn.models.room.update({
+      name
+    }, {
+      where: { id }
+    });
+  },
+  deleteRoom (id) {
+    return Conn.models.room.destroy({
+      where: { id }
+    });
+  },
+
   getUsers (filter) {
     return Conn.models.user.findAll({
       where: filter

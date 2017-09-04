@@ -18,6 +18,7 @@ get your API up and running with minimum fuss or research.
 
 ## Getting Started
 
+
 The application uses postgres as its data store so install that first and either use an IDE like pgAdmin or the command line to create a database with the name `dev-graphql`. Then enter the following to start the application:
 
     npm install
@@ -61,6 +62,31 @@ The user list can also display a list of their bookings and the user who made th
 	      }
 	    }
 	  } 
+	}
+
+## Mutations
+
+There are also simple mutation examples where a room can be maintained. For example:
+
+	query getRooms {
+	  rooms {
+	    id
+	    name
+	  }
+	}
+	
+	mutation addRoom {
+	  addRoom(name: "Kitchen") {
+	    id
+	  }
+	}
+	
+	mutation updateRoom {
+	  updateRoom(id: 1, name: "New Room Name")
+	}
+	
+	mutation deleteRoom {
+	  deleteRoom(id: 4)
 	}
 
 ## Questions

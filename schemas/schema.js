@@ -1,5 +1,6 @@
 import {
   GraphQLObjectType,
+  GraphQLNonNull,
   GraphQLString,
   GraphQLInt,
   GraphQLSchema,
@@ -52,8 +53,54 @@ const Query = new GraphQLObjectType({
   }
 });
 
+const Mutation = new GraphQLObjectType({
+  name: 'Mutations',
+  description: 'Root mutation object',
+  fields () {
+    return {
+      addRoom: {
+        type: Room,
+        args: {
+          name: {
+            type: new GraphQLNonNull(GraphQLString)
+          }
+        },
+        resolve (source, args) {
+          return Db.createRoom(args.name);
+        }
+      },
+      updateRoom: {
+        type: GraphQLInt,
+        args: {
+          id: {
+            type: new GraphQLNonNull(GraphQLInt)
+          },
+          name: {
+            type: new GraphQLNonNull(GraphQLString)
+          }
+        },
+        resolve (source, args) {
+          return Db.updateRoom(args.id, args.name);
+        }
+      },
+      deleteRoom: {
+        type: GraphQLInt,
+        args: {
+          id: {
+            type: new GraphQLNonNull(GraphQLInt)
+          }
+        },
+        resolve (source, args) {
+          return Db.deleteRoom(args.id);
+        }
+      }
+    };
+  }
+});
+
 const Schema = new GraphQLSchema({
-  query: Query
+  query: Query,
+  mutation: Mutation
 });
 
 export default Schema;
