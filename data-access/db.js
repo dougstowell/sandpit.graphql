@@ -7,7 +7,8 @@ const Conn = new Sequelize(
   'postgres',
   '', {
     dialect: 'postgres',
-    host: 'localhost'
+    host: 'localhost',
+    logging: null
   }
 );
 
@@ -69,7 +70,7 @@ Conn.sync({
     { name: 'Training Room' }
   ]).then(() => {
     return Room.findAll();
-  }).then(rooms => {
+  }).then(() => {
     _.times(10, () => {
       return User.create({
         userName: Faker.internet.userName(),

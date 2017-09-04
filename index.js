@@ -12,7 +12,8 @@ app.use('/graphql', GraphHTTP({
     graphiql: true
 }));
 
-
 app.listen(APP_PORT, () => {
+  /* eslint-disable no-console */
   console.log(`App listening on port ${APP_PORT}`);
+  /* eslint-enable no-console */
 });
