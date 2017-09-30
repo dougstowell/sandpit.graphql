@@ -1,9 +1,6 @@
 # sandpit.graphql - Playground for GraphQL Learning
 
-This is Bluesmith's reference architecture (a.k.a. `BluePrint`) for creating
-production ready server side node code to host your Application Programming
-Interface (API) layer. The code uses many best practices to allow you to quickly
-get your API up and running with minimum fuss or research.
+This is a helper guide for getting up and running with GraphQL.
 
 ## Libraries Used
 
