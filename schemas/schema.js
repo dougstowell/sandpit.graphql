@@ -16,6 +16,12 @@ const Query = new GraphQLObjectType({
   description: 'Root query object',
   fields: () => {
     return {
+      health: {
+        type: GraphQLString,
+        resolve() {
+          return 'My GraphQL server is healthy!!!'
+        }
+      },
       rooms: {
         type: new GraphQLList(Room),
         args: {
